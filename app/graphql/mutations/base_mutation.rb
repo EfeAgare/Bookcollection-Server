@@ -5,6 +5,9 @@ module Mutations
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
 
+    include HandleErrors
+    include AuthenticableUser
+
     def self.authorized?(object, context)
       unless context[:current_user]
         raise GraphQL::ExecutionError.new("Unauthorized error", options: { status: :unauthorized, code: 401 })
