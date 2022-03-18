@@ -9,7 +9,7 @@ module Mutations
         context "when a user doesn't exist" do
            it 'return an error' do
 
-            post '/graphql', params: { query: mutation("nouser@gmail.om", user.password) }
+            post graphql_path, params: { query: mutation("nouser@gmail.om", user.password) }
             
             json = JSON.parse(response.body)
             data = json['errors'][0]
@@ -25,7 +25,7 @@ module Mutations
 
         it 'returns a user after login' do
 
-          post '/graphql', params: { query: mutation(user.email, user.password) }
+          post graphql_path, params: { query: mutation(user.email, user.password) }
 
           json = JSON.parse(response.body)
           data = json['data']['loginUser']

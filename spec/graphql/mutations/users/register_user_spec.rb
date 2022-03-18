@@ -7,12 +7,12 @@ module Mutations
         it 'register a user' do
           
           expect do
-            post '/graphql', params: { query: mutation }
+            post graphql_path, params: { query: mutation }
           end.to change { User.count }.by(1)
         end
 
         it 'returns a user' do
-          post '/graphql', params: { query: mutation }
+          post graphql_path, params: { query: mutation }
           json = JSON.parse(response.body)
           data = json['data']['registerUser']
 
